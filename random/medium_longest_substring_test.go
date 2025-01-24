@@ -40,7 +40,7 @@ func isUnique(s string, start, end int) bool {
 func lengthOfLongestSubstring(s string) int {
 	l := 0
 	maxLength := 0
-	seen := make(map[byte]int)
+	seen := make(map[byte]int) // lưu vị trí xuất hiện gần nhất của mỗi ký tự
 	for r := 0; r < len(s); r++ {
 		if dup, existed := seen[s[r]]; existed && l <= dup {
 			l = dup + 1
