@@ -60,6 +60,10 @@ func canSumMemoization(targetSum int, numbers []int, memo map[int]bool) bool {
 	return false
 }
 
+func canSumTabulation(targetSum int, numbers []int) {
+
+}
+
 func Test_CanSum(t *testing.T) {
 	//fmt.Println(canSum(7, []int{5, 3, 5, 7}))
 	//fmt.Println(canSum(7, []int{5, 3, 5, 3}))

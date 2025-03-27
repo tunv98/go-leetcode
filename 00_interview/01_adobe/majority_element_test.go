@@ -38,7 +38,17 @@ func majorityElementByBoyerMooreVoting(nums []int) int {
 		}
 	}
 
-	return candidate
+	count = 0
+	for _, num := range nums {
+		if num == candidate {
+			count++
+		}
+	}
+
+	if count > len(nums)/2 {
+		return candidate
+	}
+	return -1
 }
 
 func Test_majorityElement(t *testing.T) {

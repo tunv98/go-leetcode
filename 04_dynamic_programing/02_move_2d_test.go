@@ -52,8 +52,43 @@ func gridTravelerMemoization(m, n int, memo map[string]int) int {
 	return memo[key]
 }
 
+/*
+Dựa vào code quy hoạch động => tìm ra được quy luật
+Ký hiệu dp[i][j] là số cách để đi đến ô (i, j).
+Ta có hai cách duy nhất để đến ô (i, j):
+Từ ô phía trên (i-1, j) đi xuống
+Từ ô bên trái (i, j-1) đi sang phải
+---
+dp[i][j] = dp[i-1][j] + dp[i][j-1]
+---
+
+	  j → 1   2   3
+	i ↓ -------------
+	1  |  1   1   1
+	2  |  1   2   3
+	3  |  1   3   6
+
+=> 6
+*/
+func gridTravelerTabulation(m, n int) int {
+	dp := make([][]int, m+1)
+	for i := range dp {
+		dp[i] = make([]int, n+1)
+	}
+	dp[1][1] = 1
+	for i := 1; i < m+1; i++ {
+		for j := 1; j < n+1; j++ {
+			if i == 1 && j == 1 {
+				continue
+			}
+			dp[i][j] = dp[i-1][j] + dp[i][j-1]
+		}
+	}
+	return dp[m][n]
+}
+
 func Test_GridTraveler(t *testing.T) {
 	fmt.Println("Result: ", gridTraveler(2, 3))
-	memo := map[string]int{}
-	fmt.Println("Result by memoization:", gridTravelerMemoization(2, 3, memo))
+	fmt.Println("Result by memoization:", gridTravelerMemoization(2, 3, map[string]int{}))
+	fmt.Println("Result by tabulation", gridTravelerTabulation(2, 3))
 }
